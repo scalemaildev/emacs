@@ -1,7 +1,12 @@
 ;;;; CONWAY EMACS ;;;;
 ;; This is John Conway's Emacs Config.
 ;; Started: 12/20/2018
-;; Last Update: 10/07/2019
+;; Last Update: 02/28/2021
+;;
+;; ON WINDOWS:
+;; 1. Run emacs
+;; 2. Pin icon to taskbar
+;; 3. Right click icon -> right click emacs -> properties -> point to runemacs.exe
 ;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;; BACK END ;;;;
@@ -32,7 +37,7 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 ;; Font
-(add-to-list 'default-frame-alist '(font . "mononoki-15"))
+(add-to-list 'default-frame-alist '(font . "mononoki-11"))
 ;; Titlebar
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
@@ -248,6 +253,9 @@
     (local-set-key (kbd "C-c C-c") 'recompile))
 
   (add-hook 'csharp-mode-hook 'my-csharp-mode-setup t))
+;; Haskell
+(use-package haskell-mode
+  :ensure t)
 ;;;; CUSTOM KEYBINDS ;;;;
 (use-package general
   :ensure t
