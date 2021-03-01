@@ -21,6 +21,8 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+;; Load Path
+(add-to-list 'load-path "~/.emacs.d/")
 (require 'use-package)
 ;;;; FRONT END ;;;;
 ;; Fullscreen on startup
@@ -256,6 +258,10 @@
 ;; Haskell
 (use-package haskell-mode
   :ensure t)
+;; Renpy
+;; Download .el file to .emacs.d and uncomment for renpy editing 
+;; https://github.com/elizagamedev/renpy-mode
+;; (load "renpy-mode.el")
 ;;;; CUSTOM KEYBINDS ;;;;
 (use-package general
   :ensure t
