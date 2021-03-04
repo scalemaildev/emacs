@@ -22,6 +22,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 (require 'use-package)
+;; Disable cl warning
+(setq byte-compile-warnings '(cl-functions))
 ;;;; FRONT END ;;;;
 ;; Fullscreen on startup
 (setq ns-use-native-fullscreen t)
@@ -37,7 +39,7 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 ;; Font
-(add-to-list 'default-frame-alist '(font . "mononoki-11"))
+(add-to-list 'default-frame-alist '(font . "mononoki-12"))
 ;; Titlebar
 (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 (add-to-list 'default-frame-alist '(ns-appearance . dark))
@@ -46,8 +48,9 @@
 ;; Matching parentheses
 (setq show-paren-delay 0)
 (show-paren-mode 1)
-;; Linums to all files
-(add-hook 'find-file-hook 'linum-mode)
+;; Linum (except pdfs)
+(global-linum-mode t)
+(add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
 ;; No backup files
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -112,6 +115,10 @@
   :ensure t)
 ;; PDF Tools
 (use-package pdf-tools
+  :ensure t)
+(pdf-tools-install)
+;; CDLatex
+(use-package cdlatex
   :ensure t)
 ;; CSV-mode
 (use-package csv-mode
@@ -256,8 +263,28 @@
 ;; Haskell
 (use-package haskell-mode
   :ensure t)
+;; LaTeX Hook
+(add-hook 'LaTeX-mode-hook
+	  (lambda()
+	    (turn-on-reftex)
+	    (turn-on-cdlatex)
+	    (setq TeX-auto-save t)
+	    (setq TeX-parse-self t)
+	    (setq TeX-save-query nil)
+	    (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+		  TeX-source-correlate-start-server t)
+	    (setq TeX-source-correlate-mode t)
+	    (TeX-fold-mode 1)
+	    (setq-default TeX-master nil) 
+	    (add-hook 'TeX-after-compilation-finished-functions
+		      #'TeX-revert-document-buffer)
+	    (setq reftex-plug-into-AUCTeX t)
+	    (local-set-key [C-tab] 'TeX-complete-symbol)
+	    (turn-on-auto-fill)
+	    )
+	  )
 ;; Renpy
-;; Download .el file to .emacs.d and uncomment for renpy editing 
+;; Download .el file to .emacs.d and uncomment for renpy editing
 ;; https://github.com/elizagamedev/renpy-mode
 ;; (add-to-list 'load-path "~/.emacs.d/")
 ;; (load "renpy-mode.el")
@@ -305,7 +332,7 @@
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control))))
  '(package-selected-packages
-   '(csv-mode shell-pop dashboard which-key magit pdf-tools renpy irony dimmer company-mode helm-projectile enh-ruby-mode omnisharp csharp-mode vue-mode web-mode js2-mode elpy spaceline-config spaceline beacon exec-path-from-shell general doom-themes use-package))
+   '(cdlatex magic-latex-buffer latex-preview-pane pdf-continuous-scroll-mode quelpa pdf-view auctex csv-mode shell-pop dashboard which-key magit pdf-tools renpy irony dimmer company-mode helm-projectile enh-ruby-mode omnisharp csharp-mode vue-mode web-mode js2-mode elpy spaceline-config spaceline beacon exec-path-from-shell general doom-themes use-package))
  '(python-indent-offset 4)
  '(shell-pop-autocd-to-working-dir t)
  '(shell-pop-cleanup-buffer-at-process-exit t)
