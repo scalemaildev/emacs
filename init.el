@@ -1,7 +1,7 @@
 ;;;; CONWAY EMACS ;;;;
 ;; This is John Conway's Emacs Config.
 ;; Started: 12/20/2018
-;; Last Update: 02/28/2021
+;; Last Update: 03/04/2021
 ;;
 ;; ON WINDOWS:
 ;; 1. Run emacs
@@ -116,10 +116,7 @@
 ;; PDF Tools
 (use-package pdf-tools
   :ensure t)
-(pdf-tools-install)
-;; CDLatex
-(use-package cdlatex
-  :ensure t)
+;(pdf-tools-install) ;; Remember to install first time
 ;; CSV-mode
 (use-package csv-mode
   :ensure t)
@@ -267,7 +264,6 @@
 (add-hook 'LaTeX-mode-hook
 	  (lambda()
 	    (turn-on-reftex)
-	    (turn-on-cdlatex)
 	    (setq TeX-auto-save t)
 	    (setq TeX-parse-self t)
 	    (setq TeX-save-query nil)
@@ -321,23 +317,26 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(doom-spacegrey))
+ '(custom-enabled-themes (quote (doom-spacegrey)))
  '(custom-safe-themes
-   '("8e04ea7bf8a736b0bfacd363f4810ffce774ff9ba24f356172ae2b83307aebb2" "ab9456aaeab81ba46a815c00930345ada223e1e7c7ab839659b382b52437b9ea" "b0fd04a1b4b614840073a82a53e88fe2abc3d731462d6fde4e541807825af342" "a16e816774b437acb78beb9916a60ea236cfcd05784227a7d829623f8468c5a2" "cdb3e7a8864cede434b168c9a060bf853eeb5b3f9f758310d2a2e23be41a24ae" "e95ad48fd7cb77322e89fa7df2e66282ade015866b0c675b1d5b9e6ed88649b4" "614e5089876ea69b515c50b6d7fa0a37eb7ed50fda224623ec49e1c91a0af6a1" "06e4b3fdcbadc29ff95a7146dee846cd027cfefca871b2e9142b54ad5de4832f" "34c99997eaa73d64b1aaa95caca9f0d64229871c200c5254526d0062f8074693" "1a6d627434899f6d21e35b85fee62079db55ef04ecd9b70b82e5d475406d9c69" "4e132458143b6bab453e812f03208075189deca7ad5954a4abb27d5afce10a9a" "f5568ed375abea716d1bdfae0316d1d179f69972eaccd1f331b3e9863d7e174a" "868abc288f3afe212a70d24de2e156180e97c67ca2e86ba0f2bf9a18c9672f07" "9c27124b3a653d43b3ffa088cd092c34f3f82296cf0d5d4f719c0c0817e1afa6" "e3c87e869f94af65d358aa279945a3daf46f8185f1a5756ca1c90759024593dd" "155a5de9192c2f6d53efcc9c554892a0d87d87f99ad8cc14b330f4f4be204445" "d1cc05d755d5a21a31bced25bed40f85d8677e69c73ca365628ce8024827c9e3" default))
+   (quote
+    ("8e04ea7bf8a736b0bfacd363f4810ffce774ff9ba24f356172ae2b83307aebb2" "ab9456aaeab81ba46a815c00930345ada223e1e7c7ab839659b382b52437b9ea" "b0fd04a1b4b614840073a82a53e88fe2abc3d731462d6fde4e541807825af342" "a16e816774b437acb78beb9916a60ea236cfcd05784227a7d829623f8468c5a2" "cdb3e7a8864cede434b168c9a060bf853eeb5b3f9f758310d2a2e23be41a24ae" "e95ad48fd7cb77322e89fa7df2e66282ade015866b0c675b1d5b9e6ed88649b4" "614e5089876ea69b515c50b6d7fa0a37eb7ed50fda224623ec49e1c91a0af6a1" "06e4b3fdcbadc29ff95a7146dee846cd027cfefca871b2e9142b54ad5de4832f" "34c99997eaa73d64b1aaa95caca9f0d64229871c200c5254526d0062f8074693" "1a6d627434899f6d21e35b85fee62079db55ef04ecd9b70b82e5d475406d9c69" "4e132458143b6bab453e812f03208075189deca7ad5954a4abb27d5afce10a9a" "f5568ed375abea716d1bdfae0316d1d179f69972eaccd1f331b3e9863d7e174a" "868abc288f3afe212a70d24de2e156180e97c67ca2e86ba0f2bf9a18c9672f07" "9c27124b3a653d43b3ffa088cd092c34f3f82296cf0d5d4f719c0c0817e1afa6" "e3c87e869f94af65d358aa279945a3daf46f8185f1a5756ca1c90759024593dd" "155a5de9192c2f6d53efcc9c554892a0d87d87f99ad8cc14b330f4f4be204445" "d1cc05d755d5a21a31bced25bed40f85d8677e69c73ca365628ce8024827c9e3" default)))
  '(dashboard-center-content nil)
  '(dashboard-set-footer nil)
  '(dashboard-set-init-info nil)
  '(elpy-modules
-   '(elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults))
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-django elpy-module-sane-defaults)))
  '(mouse-wheel-progressive-speed nil)
- '(mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control))))
+ '(mouse-wheel-scroll-amount (quote (1 ((shift) . 5) ((control)))))
  '(package-selected-packages
-   '(cdlatex magic-latex-buffer latex-preview-pane pdf-continuous-scroll-mode quelpa pdf-view auctex csv-mode shell-pop dashboard which-key magit pdf-tools renpy irony dimmer company-mode helm-projectile enh-ruby-mode omnisharp csharp-mode vue-mode web-mode js2-mode elpy spaceline-config spaceline beacon exec-path-from-shell general doom-themes use-package))
+   (quote
+    (cdlatex magic-latex-buffer latex-preview-pane pdf-continuous-scroll-mode quelpa pdf-view auctex csv-mode shell-pop dashboard which-key magit pdf-tools renpy irony dimmer company-mode helm-projectile enh-ruby-mode omnisharp csharp-mode vue-mode web-mode js2-mode elpy spaceline-config spaceline beacon exec-path-from-shell general doom-themes use-package)))
  '(python-indent-offset 4)
  '(shell-pop-autocd-to-working-dir t)
  '(shell-pop-cleanup-buffer-at-process-exit t)
  '(shell-pop-restore-window-configuration t)
- '(shell-pop-shell-type '("eshell" "*eshell*" (lambda nil (eshell))))
+ '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))
  '(shell-pop-universal-key "C-c t"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
