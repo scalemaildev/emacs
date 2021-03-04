@@ -117,6 +117,41 @@
 ;; Remember to use pdf-tools-install
 (use-package pdf-tools
   :ensure t)
+(pdf-tools-install)
+;; Auctex and Reftex
+(use-package reftex
+  :ensure t)
+(use-package auctex
+  :defer t
+  :ensure t)
+;; LaTeX Mode Hooks
+(add-hook 'LaTeX-mode-hook ;this are the hooks I want to enable during LaTeX-mode
+	  (lambda()
+	    (turn-on-reftex)
+	    (turn-on-cdlatex)
+	    (setq TeX-auto-save t) 
+	    (setq TeX-parse-self t)
+	    (setq TeX-save-query nil)
+	    (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+		  TeX-source-correlate-start-server t)	    
+	    (setq TeX-source-correlate-method 'synctex)
+	    (setq TeX-source-correlate-mode t)
+	    (TeX-fold-mode 1)
+	    (setq-default TeX-master nil) 
+	    (global-set-key (kbd "C-c C-g") 'pdf-sync-forward-search)
+	    (add-hook 'TeX-after-compilation-finished-functions
+		      #'TeX-revert-document-buffer)
+	    (setq reftex-plug-into-AUCTeX t)
+	    (local-set-key [C-tab] 'TeX-complete-symbol)
+	    (setq LaTeX-csquotes-close-quote "}"
+		  LaTeX-csquotes-open-quote "\\enquote{")
+	    (setq ispell-program-name "aspell") 
+	    (setq ispell-dictionary "english")
+	    (flyspell-mode t)
+	    (flyspell-buffer t)
+	    (turn-on-auto-fill)
+	    )
+	  )
 ;; CSV-mode
 (use-package csv-mode
   :ensure t)
