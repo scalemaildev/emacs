@@ -114,9 +114,9 @@
 (use-package company
   :ensure t)
 ;; PDF Tools
+;; Remember to use pdf-tools-install
 (use-package pdf-tools
   :ensure t)
-;(pdf-tools-install) ;; Remember to install first time
 ;; CSV-mode
 (use-package csv-mode
   :ensure t)
@@ -260,25 +260,6 @@
 ;; Haskell
 (use-package haskell-mode
   :ensure t)
-;; LaTeX Hook
-(add-hook 'LaTeX-mode-hook
-	  (lambda()
-	    (turn-on-reftex)
-	    (setq TeX-auto-save t)
-	    (setq TeX-parse-self t)
-	    (setq TeX-save-query nil)
-	    (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-		  TeX-source-correlate-start-server t)
-	    (setq TeX-source-correlate-mode t)
-	    (TeX-fold-mode 1)
-	    (setq-default TeX-master nil) 
-	    (add-hook 'TeX-after-compilation-finished-functions
-		      #'TeX-revert-document-buffer)
-	    (setq reftex-plug-into-AUCTeX t)
-	    (local-set-key [C-tab] 'TeX-complete-symbol)
-	    (turn-on-auto-fill)
-	    )
-	  )
 ;; Renpy
 ;; Download .el file to .emacs.d and uncomment for renpy editing
 ;; https://github.com/elizagamedev/renpy-mode
@@ -336,7 +317,11 @@
  '(shell-pop-autocd-to-working-dir t)
  '(shell-pop-cleanup-buffer-at-process-exit t)
  '(shell-pop-restore-window-configuration t)
- '(shell-pop-shell-type (quote ("eshell" "*eshell*" (lambda nil (eshell)))))
+ '(shell-pop-shell-type
+   (quote
+    ("ansi-term" "*ansi-term*"
+     (lambda nil
+       (ansi-term shell-pop-term-shell)))))
  '(shell-pop-universal-key "C-c t"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
