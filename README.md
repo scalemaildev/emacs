@@ -1,4 +1,4 @@
 # init.el
-My Emacs init.el
+My Emacs init.el. Works in Win/Mac/Linux
 
-My portable Emacs setup. Clone to ~/.emacs.d
+My portable Emacs setup. Clone to ~/.emacs.d (~ or AppData/Roaming)
