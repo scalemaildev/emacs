@@ -1,7 +1,7 @@
 ;;;; CONWAY EMACS ;;;;
 ;; This is John Conway's Emacs Config.
 ;; Started: 12/20/2018
-;; Last Update: 03/04/2021
+;; Last Update: 03/05/2021
 ;;
 ;; ON WINDOWS:
 ;; 1. Run emacs
@@ -70,7 +70,7 @@
   helm-imenu-fuzzy-match t
   helm-completion-in-region-fuzzy-match t
   helm-candidate-number-list 150
-  helm-split-window-in-side-p t
+  helm-split-window-inside-p t
   helm-move-to-line-cycle-in-source t
   helm-echo-input-in-header-line t
   helm-autoresize-max-height 0
@@ -114,7 +114,6 @@
 (use-package company
   :ensure t)
 ;; PDF Tools
-;; Remember to use pdf-tools-install
 (use-package pdf-tools
   :ensure t)
 (pdf-tools-install)
@@ -129,15 +128,15 @@
 	  (lambda()
 	    (turn-on-reftex)
 	    (turn-on-cdlatex)
-	    (setq TeX-auto-save t) 
+	    (setq TeX-auto-save t)
 	    (setq TeX-parse-self t)
 	    (setq TeX-save-query nil)
 	    (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
-		  TeX-source-correlate-start-server t)	    
+		  TeX-source-correlate-start-server t)
 	    (setq TeX-source-correlate-method 'synctex)
 	    (setq TeX-source-correlate-mode t)
 	    (TeX-fold-mode 1)
-	    (setq-default TeX-master nil) 
+	    (setq-default TeX-master nil)
 	    (global-set-key (kbd "C-c C-g") 'pdf-sync-forward-search)
 	    (add-hook 'TeX-after-compilation-finished-functions
 		      #'TeX-revert-document-buffer)
@@ -145,7 +144,7 @@
 	    (local-set-key [C-tab] 'TeX-complete-symbol)
 	    (setq LaTeX-csquotes-close-quote "}"
 		  LaTeX-csquotes-open-quote "\\enquote{")
-	    (setq ispell-program-name "aspell") 
+	    (setq ispell-program-name "aspell")
 	    (setq ispell-dictionary "english")
 	    (flyspell-mode t)
 	    (flyspell-buffer t)
